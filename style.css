@@ -1,0 +1,97 @@
+:root {
+  --background-color: #a2e0f7;
+  --calculator-background-color: #51504e;
+  --color1: #68d2f2;
+  --color2: #7175DE;
+  --color3: #8AFF82;
+}
+*{
+  font-family: 'Roboto', sans-serif;
+}
+html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+  display : flex;
+  justify-content : center;
+  align-items: center;
+  flex-grow: 1;
+  height: 100%;
+  margin: 0;
+  background-color: var(--background-color);
+}
+
+#calculator {
+  display : flex;
+  flex-direction: column;
+  width : 300px;
+  height : 500px;
+  background-color: var(--calculator-background-color);
+  box-shadow: 0 8px 8px -4px;
+}
+#display-area{
+  flex-basis: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end
+}
+#display-area-top {
+  color: white;
+  font-size: 36px;
+  font-weight: 300;
+  padding: 20px;
+} 
+#display-area-bottom {
+  color: var(--color1);
+  font-weight: 700;
+  font-size: 44px;
+  padding: 20px;
+}
+#buttons-area {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.buttons-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-grow: 1;
+}
+#buttons-area-top {
+  display: flex;
+  flex-basis: 75%;
+}
+#buttons-area-top-left {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 75%;
+}
+#buttons-area-top-right {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+#buttons-area-bottom {
+  display: flex;
+  flex-basis: 25%;
+}
+#buttons-area button {
+  flex-shrink: 1;
+  flex-basis : 100%;
+  background-color: transparent;
+  border: none;
+  font-size: 40px;
+  font-weight: 700;
+  color: white;
+  height: 100%;
+}
+#buttons-area-top-right button {
+  font-size: 18px;
+}
+#buttons-area  #equals{
+  background-color: var(--color1);
+}
