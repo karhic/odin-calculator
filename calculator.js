@@ -30,6 +30,12 @@ function operate(num1, num2, operator){
 function updateDisplay(){
   let topDisplay = document.querySelector("#display-area-top");
   let bottomDisplay = document.querySelector("#display-area-bottom");
+  if (topDisplayValue.length > 12) {
+    topDisplayValue = topDisplayValue.substring(0,9) + "...";
+  }
+  if (bottomDisplayValue.length > 11) {
+    bottomDisplayValue = bottomDisplayValue.substring(0,9) + "...";
+  }
   topDisplay.textContent = topDisplayValue;
   bottomDisplay.textContent = bottomDisplayValue;
 }
@@ -49,9 +55,9 @@ for (let i  = 1; i <= 9 ; i++){
 }
 let zeroButton = document.querySelector("#zero");
 zeroButton.addEventListener("click", () => {
-  if (num1 && !num2 && !operator) {
+  if (!num2 && !operator && num1 != "0") {
     num1 += "0";
-  } else if (num1 && operator && num2) {
+  } else if (num1 && operator &&  num2 != "0") {
     num2 += "0";
   }
   bottomDisplayValue = num1 + operator + num2;
@@ -62,34 +68,26 @@ let subtractButton = document.querySelector("#subtract");
 let multiplyButton = document.querySelector("#multiply");
 let divideButton = document.querySelector("#divide");
 let equalsButton = document.querySelector("#equals");
-addButton.addEventListener("click", () => {
-  if (!operator){
-    operator = "+";
+function operatorEventListener(theOperator) {
+  return (() => { 
+    if (!operator){
+    operator = theOperator;
     bottomDisplayValue = num1 + operator + num2;
     updateDisplay();
   } else {
     equals();
-    operator = "+";
+    operator = theOperator;
     num2 = "";
     bottomDisplayValue = num1 + operator;
     updateDisplay();
   }
-  });
-subtractButton.addEventListener("click", () => {
-  if (!operator){operator = "-"};
-  bottomDisplayValue = num1 + operator + num2;
-  updateDisplay();
-});
-divideButton.addEventListener("click", () => {
-  if(!operator){operator = "/"};
-  bottomDisplayValue = num1 + operator + num2;
-  updateDisplay();
-});
-multiplyButton.addEventListener("click", () => {
-  if(!operator){operator = "x"};
-  bottomDisplayValue = num1 + operator + num2;
-  updateDisplay();
-});
+  })
+}
+    
+addButton.addEventListener("click", operatorEventListener("+")); 
+subtractButton.addEventListener("click",operatorEventListener("-"));
+divideButton.addEventListener("click", operatorEventListener("/"));
+multiplyButton.addEventListener("click", operatorEventListener("x"));
 equalsButton.addEventListener("click",equals);
 function equals() {
   if (num1 && num2 && operator) {
@@ -97,28 +95,28 @@ function equals() {
    updateDisplay();
   } 
   if (num1 && num2 && operator == "+"){
-    num1 = add(parseInt(num1), parseInt(num2));
+    num1 = add(parseInt(num1), parseInt(num2)).toString();
     operator = "";
     num2 = "";
     bottomDisplayValue = num1;
     updateDisplay();
   }
   if (num1 && num2 && operator == "-"){
-    num1 = subtract(parseInt(num1), parseInt(num2));
+    num1 = subtract(parseInt(num1), parseInt(num2)).toString();
     operator = "";
     num2 = "";
     bottomDisplayValue = num1;
     updateDisplay();
   }
   if (num1 && num2 && operator == "x"){
-    num1 = multiply(parseInt(num1), parseInt(num2));
+    num1 = multiply(parseInt(num1), parseInt(num2)).toString();
     operator = "";
     num2 = "";
     bottomDisplayValue = num1;
     updateDisplay();
   }
   if (num1 && num2 && operator == "/"){
-    num1 = divide(parseInt(num1), parseInt(num2));
+    num1 = divide(parseInt(num1), parseInt(num2)).toString();
     operator = "";
     num2 = "";
     bottomDisplayValue = num1;
