@@ -63,6 +63,25 @@ zeroButton.addEventListener("click", () => {
   bottomDisplayValue = num1 + operator + num2;
   updateDisplay();
 });
+let pointButton = document.querySelector("#point");
+pointButton.addEventListener("click", () => {
+  if (!num2 && !operator && num1 && !num1.includes(".")){
+    num1 += ".";
+  } else if (num1 && operator && num2 && !num2.includes(".")){
+    num2 += ".";
+  }
+  bottomDisplayValue = num1 + operator + num2;
+  updateDisplay();
+})
+let acButton = document.querySelector("#ac");
+acButton.addEventListener("click", () => {
+  num1 = "";
+  num2 = "";
+  operator = "";
+  topDisplayValue = "";
+  bottomDisplayValue = "";
+  updateDisplay();
+})
 let addButton = document.querySelector("#add");
 let subtractButton = document.querySelector("#subtract");
 let multiplyButton = document.querySelector("#multiply");
@@ -70,11 +89,11 @@ let divideButton = document.querySelector("#divide");
 let equalsButton = document.querySelector("#equals");
 function operatorEventListener(theOperator) {
   return (() => { 
-    if (!operator){
+    if (num1 && !operator){
     operator = theOperator;
     bottomDisplayValue = num1 + operator + num2;
     updateDisplay();
-  } else {
+  } else if (num1 && operator && num2){
     equals();
     operator = theOperator;
     num2 = "";
@@ -95,31 +114,31 @@ function equals() {
    updateDisplay();
   } 
   if (num1 && num2 && operator == "+"){
-    num1 = add(parseInt(num1), parseInt(num2)).toString();
+    num1 = add(parseFloat(num1), parseFloat(num2)).toString();
     operator = "";
     num2 = "";
     bottomDisplayValue = num1;
     updateDisplay();
   }
   if (num1 && num2 && operator == "-"){
-    num1 = subtract(parseInt(num1), parseInt(num2)).toString();
+    num1 = subtract(parseFloat(num1), parseFloat(num2)).toString();
     operator = "";
     num2 = "";
     bottomDisplayValue = num1;
     updateDisplay();
   }
   if (num1 && num2 && operator == "x"){
-    num1 = multiply(parseInt(num1), parseInt(num2)).toString();
+    num1 = multiply(parseFloat(num1), parseFloat(num2)).toString();
     operator = "";
     num2 = "";
     bottomDisplayValue = num1;
     updateDisplay();
   }
   if (num1 && num2 && operator == "/"){
-    num1 = divide(parseInt(num1), parseInt(num2)).toString();
+    num1 = "";
     operator = "";
     num2 = "";
-    bottomDisplayValue = num1;
+    bottomDisplayValue = "derp";
     updateDisplay();
   }
 
